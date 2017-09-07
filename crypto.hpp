@@ -1,5 +1,6 @@
 #include <openssl/evp.h>
 #include <openssl/sha.h>
+#include <openssl/md5.h>
 #include <sstream>
 #include <iomanip>
 #include <string>
@@ -22,7 +23,9 @@ public:
 
   /// Return the MD5 (128-bit) hash from input.
   static std::string md5(const std::string &input) {
-    throw std::logic_error("not yet implemented");
+    std::string hash;
+    hash.resize( 128 / 8 );
+    MD5((const unsigned char *)input.data(), input.size(), (unsigned char *)hash.data());
   }
 
   /// Return the SHA-1 (160-bit) hash from input.
